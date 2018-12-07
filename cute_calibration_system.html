@@ -1,0 +1,1257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+********************************************************************************
+** File:        cute_cryo.html
+**
+** Description: CUTE calibration system webpage
+**
+** Revisions:   2018-08-13 - Payam Pakarha created
+********************************************************************************
+-->
+
+<html>
+<title>CUTE calibration system </title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+</head>
+
+<body onload="initialize();">
+<style type = "text/css">
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 20px;
+    margin-right: 50px;
+}
+
+/* Style the header */
+header {
+    background-color: #808080;
+    color: #FFFFFF;
+    padding-top: 0px;
+    text-align: center;
+    font-size: 30px;
+    height: 60px;
+    border: 0px solid black;
+}
+
+
+/* Style the buttons */
+.btn {
+    border: none;
+    outline: none;
+    width: 49.2%;
+    padding: 10px 16px;
+    background-color: #D5F5E3;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.btn:hover {
+    background-color: #239B56;
+}
+
+/* Style the active class, and buttons on mouse-over */
+.active {
+    background-color: #1E8449;
+    color: white;
+}
+
+.inactive {
+    bacground-color: #99A3A4; 
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+/* General panel style */
+.div{
+    background: #F8F9F9;
+}
+
+/* Left panel for the Automatic calibration */
+divl {
+    float: left;
+    width: 30%;
+    height: 420px; 
+    background: #F8F9F9;
+    padding-top: 0px;
+    border: 5px solid grey;
+}
+
+/* Right panel for the Manaual calibration */
+divr {
+    float: right;
+    width: 70%;
+    height: 420px; 
+    background: #F8F9F9;
+    padding-top: 0px;
+    border: 5px solid grey;
+}
+
+div2 {
+    float: left;
+    position: relative;
+    width: 100%;
+    height: 250px; 
+    background: #F8F9F9;
+    margin-top: 620;
+    padding-top: 0px;
+    border: 5px solid silver;
+}
+
+/* The central part between the right and left panels for the toggle button */
+divc {
+    float: left;
+    width: 20%;
+    height: 175px; 
+    background: white;
+    padding-top: 0px;
+    border: 5px solid silver;
+}
+
+div.lg {
+    display: none;  /* comment if you want to see */
+    font: 14px verdana; 
+    border: 5px solid #d3d3d3; 
+    padding: 3px 6px 3px 6px; 
+    width: 100%;
+    height: 300px;
+    line-height:1.2em;
+    overflow:auto;
+}
+
+div.typ {
+    display : none;
+    font: 14px verdana; 
+    border: 5px solid #d3d3d3; 
+    padding: 3px 6px 3px 6px; 
+    width: 100%;
+    height: 50px;
+    line-height:1.2em;
+    overflow:auto;
+}
+
+
+/* Style the display table */
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+    margin-left: 40px;
+    empty-cells: hide;
+    color: #000000;
+}
+
+td, th {
+    border: 2px solid #dddddd;
+    text-align: center;
+    padding: 0px;
+    width: 20%;
+}
+
+tr {
+   background-color:  #ebf5fb;
+}
+
+tr:nth-child(odd) {
+    background-color: #AED6F1;
+}
+
+th {
+    background-color: #3498DB;
+}
+
+/* The box size to include buttons */
+divb {
+    float: left;
+    width: 49%;
+    height: 200px; 
+    padding-top: 0px;
+}
+
+/* The buttons */
+.w3-button {
+    width: 200px;
+    height: 70px;
+}
+
+/* The small buttons */
+.smallb {
+    width: 70px;
+    height: 70px;
+}
+
+/*The Large buttons */
+.largeb {
+    width: 100%;
+    height: 60px;
+    font-size: 24px;
+}
+
+/* Input form style */
+input[type=radio] {
+    border: 0px;
+    width: 15px;
+    height: 15px;
+}
+
+input[type=number] {
+    height : 30px;
+    width : 80px;
+}
+input[type=submit] {
+    width : 200px;
+    height : 70px;
+    background-color: #00FF00;
+}
+
+input[type=submit][disabled],
+input[type=submit]:disabled{
+    background-color: #808080; 
+    color: #FFFFFF;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+
+/* To represent moving upwards (towards the storage box) */
+.triangle-up {
+	width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+	border-right: 25px solid transparent;
+	border-bottom: 50px solid #800000;
+}
+
+/* To represent moving downward (towards the cryostat) */
+.triangle-down {
+	width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+	border-right: 25px solid transparent;
+	border-top: 50px solid #800000;
+}
+
+/* Clear floats after the columns */
+section:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.gray_text {
+    color: #808080;
+}
+
+.black_text {
+    color: #000000;
+}
+
+/* The blue LED for secure source */
+.led-blue {
+  margin-left: 60px;
+  margin-top:45px;
+  width: 125px;
+  height: 125px;
+  background-color: #24E0FF;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3F8CFF 0 2px 14px;
+}
+
+/* Red flashing LED for source not secure */
+.led-red {
+  margin-left: 60px;
+  margin-top: 45px;
+  width: 125px;
+  height: 125px;
+  background-color: #F00;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 12px;
+  -webkit-animation: blinkRed 0.5s infinite;
+  -moz-animation: blinkRed 0.5s infinite;
+  -ms-animation: blinkRed 0.5s infinite;
+  -o-animation: blinkRed 0.5s infinite;
+  animation: blinkRed 0.5s infinite;
+}
+
+@-webkit-keyframes blinkRed {
+    from { background-color: #F00; }
+    50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+    to { background-color: #F00; }
+}
+@-moz-keyframes blinkRed {
+    from { background-color: #F00; }
+    50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+    to { background-color: #F00; }
+}
+@-ms-keyframes blinkRed {
+    from { background-color: #F00; }
+    50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+    to { background-color: #F00; }
+}
+@-o-keyframes blinkRed {
+    from { background-color: #F00; }
+    50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+    to { background-color: #F00; }
+}
+@keyframes blinkRed {
+    from { background-color: #F00; }
+    50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+    to { background-color: #F00; }
+}
+
+
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+margin: 24px 0 12px 0;
+position: relative;
+}
+
+img.avatar {
+width: 40%;
+       border-radius: 50%;
+}
+
+.container {
+padding: 16px;
+}
+
+span.psw {
+float: right;
+       padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+display: none; /* Hidden by default */
+position: fixed; /* Stay in place */
+          z-index: 1; /* Sit on top */
+left: 0;
+top: 0;
+width: 100%; /* Full width */
+height: 100%; /* Full height */
+overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(0,0,0); /* Fallback color */
+          background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+          padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+border: 1px solid #888;
+width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+position: absolute;
+right: 25px;
+top: 0;
+color: #000;
+       font-size: 35px;
+       font-weight: bold;
+}
+
+.close:hover,
+    .close:focus {
+color: red;
+cursor: pointer;
+    }
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s';
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+    display: block;
+    float: none;
+    }
+    .cancelbtn {
+    width: 100%;
+    }
+}
+
+lidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.sliderticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.sliderticks p {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: left;
+  width: 1px;
+  background: #D3D3D3;
+  height: 10px;
+  line-height: 40px;
+  margin: 0 0 20px 0;
+}
+
+.sliderticks t {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: left;
+  width: 0px;
+  background: #D3D3D3;
+  color: #1A5276;
+  height: 10px;
+  line-height: 0px;
+  margin: 0 0 20px 0;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+}
+
+.boxc {
+  display: flex;
+  flex-direction: column;
+}
+
+
+</style>
+
+</head>
+
+<header>
+  <h1>CUTE Calibration System</h1>
+</header>
+
+<section>
+
+  <divl id="AutoDiv" class="div">
+    <button align="top" id="Auto_Button" class="btn largeb">Automatic Calibration </button>
+    <p align="center"><button id="Deploy" class="w3-button w3-disabled w3-gray w3-round" align="center" onclick="deploy_source()" disabled="true"><font size="4">Deploy for Calibration</font></button></p>	
+    <p align="center"><button id="Rest" class="w3-button w3-disabled w3-gray w3-round" align="center" onclick="send_storage()" disabled="true"><font size="4">Send to Storage</font></button></p>  
+    <table style="margin-top:10%;">
+      <tr>
+        <td style="border:0; visibility:hidden;"></td>
+        <th>Set</th>
+        <th>Act.</th>
+      </tr>
+      <tr>
+        <th>Speed (cm/s)</th>
+        <td id="SetSpeedCell"></td>
+        <td id="ActSpeedCell"></td>
+      </tr>
+      <tr>
+        <th>Position (cm)</th>
+        <td id="SetPosCell"></td>
+        <td id="ActPosCell"></td>
+      </tr>
+    </table>
+
+  </divl>
+
+  <divr id="ManDiv" class="div">
+    <button align="top" id="Manual_Button" class="btn largeb">Manual Calibration </button>
+    <div class="box">
+      <divb id="SubmitSpeedPos" style="margin-top:3%;"> 
+        <form id="frm1" style="margin-left:30px;">
+          <font size="4"> Set Source Speed: </font><br> 
+          <div style="width: 35%; float: left;"><font  size="3" id="MotorSpeed"></font><font size="3"> cm/s </font></div> <div style="width: 50%; float: left;"><input type="number" step="0.01" value="" size ="26"></div><br>
+          <br><font size="4"> Set Destination Source Position: </font><br> 
+          <div style="width: 35%; float: left;"><font size="3" id="Height"></font><font size="3"> cm </font></div> <div style="width: 50%; float: left;"><input type="number" step="0.01" value="" size ="26"></div><br><br>
+         </form> 
+      </divb>
+
+      <divb id="SubmitMoveType" style="margin-left:10%; margin-top:3%;"> 
+        <form id="frm2" style="margin-top:0px;margin-left:0px;">
+	      <font id="ModeText" class="gray_text"  size="4"> Select calibration type: </font><br><br>
+          <input id="FixedSpeedMode" type="radio" name="calibration_mode" disabled="true"> <font id="ModeText1" class="gray_text" size="4"> Fixed Speed (STOP Manually, select direction) </font><br>
+          <input id="FixedPosMode" type="radio" name="calibration_mode" disabled="true" checked> <font id="ModeText2" class="gray_text" size="4"> Fixed Position and Speed </font>
+        </form>  
+      </divb>
+
+      <divb id="UpDownPanel" >
+        <font size="4"> &emsp;&emsp;&emsp;&emsp;&emsp; Set Direction: </font>
+        <p align="center"><button id="UpButton" class="w3-button w3-disabled smallb w3-grey w3-round" align="center" disabled="true"><div class="triangle-up" id="UpDiv" style="margin-left:-15%;"></div></button></p>	
+        <p align="center"><button id="DownButton" class="w3-button w3-disabled smallb w3-grey w3-round" align="center" disabled="true"><div class="triangle-down" id="DownDiv" style="margin-left:-15%;"></div></button></p>	 
+      </divb>
+    </div>
+    
+    <div class="box">
+      <div class="boxc" style="margin-left:10%;margin-top:-4%;">
+        <input id="SubmitSetPoints" type="submit" onclick="read_values(event)" value ="Set Values" disabled="true">
+        <input id="SubmitAutoSettings"  type="submit" onclick="update_settings(event)" value ="Submit" disabled="true">
+      </div>
+
+      <divb id="StartStopPanel" style="margin-left:10%; margin-top:-6%;">
+        <p align="center"><button id="StartButton" class="w3-button w3-disabled w3-grey w3-round" align="center" disabled="true"><div id="StartDiv" style="margin-top:-5%;"><font size="24">START</font></div></button></p>	
+        <p align="center"><button id="StopButton" class="w3-button w3-disabled w3-grey w3-round" align="center" disabled="true"><div id="StopDiv" style="margin-top:-5%;"><font size="24">STOP</font></div></button></p>	  
+      </divb>
+    </div>
+ 
+
+  </divr>
+  
+  <div2 id="DisplayDiv">  
+  <div style="float:left;width:10%;height:60px;background-color:#D5F5E3;margin-top:80px;margin-left:30px;text-align:center;">
+    <font size="4"> Logged in as: </font><br>
+    <font size="4" id="user_indicator">  </font>
+  </div> 
+  <div style="float:left;width:20%;height:150px;margin-left:2%;margin-top:10px;"> 
+      <div id="led-div" class="led-blue">
+      <br> 
+      <h4 id="led-text" align="center" style="margin-top:15px;">Resting!</h4>
+      </div>
+    </div>
+ 
+    <div id="slider-div" style="flaot:left;width:50%;height:200px;margin-left:40%;">
+      <h5 style="margin-top:10px;" align="center"> Source Position (Depth from the edge of drywell in cm) </h5>
+       <div class="sliderticks">
+        <t>Rest</t>
+        <t>Drywell</t>
+        <t>  </t>
+        <t>  </t>
+        <t>  </t>
+        <t>  </t>
+        <t>  </t>
+        <t>  </t>
+        <t>  </t>
+        <t>Detectors</t>
+        <t>  </t>
+        <t>  </t>
+        <t>  </t>
+      </div>
+      <input type="range" min="-10" max="110" value="0" steps="1" class="slider" id="SourcePositionSlider" style="" disabled="true">
+      <div class="sliderticks">
+        <p>-10</p>
+        <p>0</p>
+        <p>10</p>
+        <p>20</p>
+        <p>30</p>
+        <p>40</p>
+        <p>50</p>
+        <p>60</p>
+        <p>70</p>
+        <p>80</p>
+        <p>90</p>
+        <p>100</p>
+        <p>110</p>
+      </div>
+      <h5 style="margin-top:10px;" align="center"> Source Speed (cm/s) </h5> 
+      <input type="range" min="0" max="10" value="0" steps="0.1" class="slider" id="MotorSpeedSlider" style="margin-top:0px;" disabled="true">
+      <div class="sliderticks">
+        <p>0</p>
+        <p>1</p>
+        <p>2</p>
+        <p>3</p>
+        <p>4</p>
+        <p>5</p>
+        <p>6</p>
+        <p>7</p>
+        <p>8</p>
+        <p>9</p>
+        <p>10</p>
+      </div>
+    </div>
+  </div2>  
+  
+  <div id="log" class="lg">
+  </div> 
+  <div id="typ" class="typ" >
+    <label> comment: </label>
+    <input type="text" id="comment" style="width:93%; height:90%; font:14px verdana;" autofocus onblur="var noBlur=this; setTimeOut(function() {noBlur.focues()},10)" onkeypress="Comment(event)" onkeydown="CommentKey(event)">
+  </div> 
+
+  <div id="LoginDiv" class="modal"> 
+    <form class="modal-content animate" id="LoginForm" action="login.php" method="post">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('LoginDiv').style.display='none'" class="close" title="Close Modal">&times;</span>
+      </div>
+
+      <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" id="uname" placeholder="Enter Username" name="uname" required>
+        <label for="psw"><b>Password</b></label>
+        <input type="password" id="pswd" placeholder="Enter Password" name="psw" required>
+        <button type="submit">Login</button>
+      </div>
+
+      <div class="container" style="background-color:#f1f1f1">
+        <button type="button" onclick="document.getElementById('LoginDiv').style.display='none'" class="cancelbtn">Cancel</button>
+      </div>
+    </form>
+  </div>
+  
+
+</section>
+</body>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+
+
+/* define the objects for java code */
+
+/* html objects */ 
+var header = document.getElementById("ToggleDiv");
+var auto_div = document.getElementById("AutoDiv");
+var man_div = document.getElementById("ManDiv");
+var aut_but = document.getElementById("Auto_Button");
+var man_but = document.getElementById("Manual_Button");
+aut_but.addEventListener("click", activate_auto);
+man_but.addEventListener("click", activate_man);
+var start_button = document.getElementById("StartButton");
+var stop_button = document.getElementById("StopButton");
+var up_button = document.getElementById("UpButton");
+var down_button = document.getElementById("DownButton");
+var deploy = document.getElementById("Deploy");
+var rest = document.getElementById("Rest");
+var fixed_speed_mode = document.getElementById("FixedSpeedMode");
+var fixed_pos_mode = document.getElementById("FixedPosMode");
+var submit_set_points = document.getElementById("SubmitSetPoints");
+var submit_auto_settings = document.getElementById("SubmitAutoSettings");
+var mode_text = document.getElementById("ModeText");
+var mode_text1 = document.getElementById("ModeText1");
+var mode_text2 = document.getElementById("ModeText2");
+var act_speed_txt = document.getElementById("MotorSpeed");
+var act_pos_txt = document.getElementById("Height");
+var indicator_div = document.getElementById("led-div");
+var indicator_txt = document.getElementById("led-text");
+var position_slider = document.getElementById("SourcePositionSlider");
+var speed_slider = document.getElementById("MotorSpeedSlider");
+var login_div = document.getElementById("LoginDiv");
+var log = document.getElementById('log');
+var user_indicator = document.getElementById('user_indicator');
+
+/* cute server */ 
+var cuteServer;
+
+/* variables to feed from server*/
+var pos_calib; 
+var d_speed_auto;
+var someone_logged_in;
+$.ajax({
+    type: 'POST',
+    async: false,
+    url: "calibration_files/calibration_pos.txt",
+    success: function(data) {pos_calib = data;}
+});
+$.ajax({
+    type: 'POST',
+    async: false,
+    url: "calibration_files/calibration_speed.txt",
+    success: function(data) {d_speed_auto = data;}
+});
+
+var access_lvl = localStorage.getItem("access_lvl");
+var current_user = localStorage.getItem("current_user");
+
+/* Global variables used in js */ 
+var last_message ;
+var comNum =0;
+var comHis =[''];
+log.innerHTML = '';
+var d_speed = "";
+var d_pos = "";
+var pos_secure = ""; 
+var act_speed = 0;
+var act_pos = ""; 
+var source_status;
+var last_x;
+var usign_flag = false;
+var up_down_flag = 0;
+
+/* User-defined numbers */ 
+var kComHisLen = 100; /* Position History Length */ 
+var kLogHisLen = 200; /* Log window scrollback lines */ 
+var speed_max = 10; 
+var speed_min = 0.5; 
+var pos_max = 110;
+var pos_min = -10; 
+var refresh_frequency = 500; /*in ms */
+var calib_factor = 100; /*factor that converts position from cm to steps(au) */
+
+/* Alerts */
+var low_speed_alert =  "The submitted value for motor speed is too low! Please select a value > " + speed_min.toFixed(2).toString() + " cm/s" ;
+var high_speed_alert =  "The submitted value for motor speed is too high! Please select a value < " + speed_max.toFixed(2).toString() + " cm/s" ;
+var low_pos_alert =  "The submitted value for source destination is too low! Please select a value > " + pos_min.toFixed(2).toString() + " cm" ;
+var high_pos_alert =  "The submitted value for source destination is too high! Please select a value < " + pos_max.toFixed(2).toString() + " cm" ;
+var pos_alert = "Reached the maximum allowed limit for the source position, the motor is stopped!"; 
+
+/* avr commands */
+var stop_cmd = "avr0:m0 stop "; 
+
+/* Just a check on whether the current user meets the access lvl or not */
+function require_access_lvl (lvl) {
+  var access = false;
+  if (access_lvl >= lvl) {
+    access = true;
+  }
+  else if (someone_logged_in == "y" && access_lvl == 0) {
+    alert ("Sorry! Other users have logged in. We can't allow you to use this feature unless they log out.");
+  }
+  else {
+    alert ("You can't access this feature! Please login using the right username and password");
+    login_div.style.display='block';
+  }
+   return access;
+}
+
+/* Activates the automatic calibration panel */
+function activate_auto() {
+    if (!require_access_lvl(1)) {
+        return;
+    }
+    $.post("someone_using.php",{someone_using:"y"});
+    using_flag = true;
+    auto_div.className = "active";
+    man_div.className = "div";
+    aut_but.className = "btn largeb active";
+    man_but.className = "btn largeb"; 
+    up_button.className = "w3-button w3-disabled w3-round w3-grey smallb"; 
+    up_button.disabled = true;
+    down_button.className = "w3-button w3-disabled w3-round w3-grey smallb";
+    down_button.disabled = true;
+    start_button.className = "w3-button w3-disabled w3-round w3-grey"; 
+    start_button.disabled = true; 
+    
+    stop_button.className = "w3-button w3-disabled w3-round w3-grey";
+    stop_button.disabled = true;
+    deploy.className = "w3-button w3-round w3-deep-orange";
+    deploy.disabled = false; 
+    rest.className = "w3-button w3-round w3-deep-orange";
+    rest.disabled = false;
+    fixed_speed_mode.disabled = true;
+    fixed_pos_mode.disabled = true;
+    submit_set_points.disabled = true;
+    submit_auto_settings.disabled= true;
+    mode_text.className="gray_text"; 
+    mode_text1.className="gray_text";  
+    mode_text2.className="gray_text"; 
+} 
+
+/* Activates the manaual calirbation panel */
+function activate_man() {
+  if (!require_access_lvl(2)) {
+        return;
+    }
+  $.post("someone_using.php",{someone_using:"y"});
+  using_flag = true;
+  man_div.className = "active";
+  auto_div.className = "div";
+  aut_but.className = "btn largeb";
+  man_but.className = "btn largeb active"; 
+  up_button.className = "w3-button smallb w3-pale-yellow w3-round";
+  up_button.disabled = false;
+  down_button.className = "w3-button smallb w3-pale-yellow w3-round";
+  down_button.disabled = false;
+  start_button.className = "w3-button w3-round w3-pale-green"; 
+  start_button.disabled = false;
+  stop_button.className = "w3-button w3-round w3-pale-red";
+  stop_button.disabled = false;
+  deploy.className = "w3-button w3-round w3-grey";
+  deploy.disabled = true;
+  rest.className = "w3-button w3-round w3-grey";
+  rest.disabled = true;
+  fixed_speed_mode.disabled = false;
+  fixed_pos_mode.disabled = false;
+  submit_set_points.disabled = false; 
+  submit_auto_settings.disabled = false;
+  mode_text.className ="black_text";
+  mode_text1.className ="black_text";
+  mode_text2.className ="black_text";
+} 
+
+/*Deploy source to calibration position given last updated settings */
+function deploy_source() {
+  alert('Sending Source to calibration point (Press OK!)');
+  Send('avr0: m0 on 1');
+  var txt = "avr0: m0 step " + pos_calib + " " + d_speed_auto;
+  Send(txt);
+}
+
+function send_storage() {
+  alert('Sending Source to the storage point (Press OK!)');
+  Send('avr0: m0 on 1');
+  var txt = "avr0: m0 step " + pos_secure + " " + d_speed_auto;
+  Send(txt);
+}
+
+
+/* Setup the Up and Down buttons */
+header = document.getElementById("UpDownPanel");
+btns = header.getElementsByClassName("w3-button");
+btns[0].addEventListener("click",activate_up);
+btns[1].addEventListener("click",activate_down);
+
+/* Function to active the Upward direction */
+function activate_up() {
+  up_down_flag = 1;
+  up_button.className = "w3-button smallb w3-yellow w3-round";
+  down_button.className = "w3-button smallb w3-pale-yellow w3-round";
+  Send("avr0:m0 dir 1");
+}
+
+/* Function to activate the Downward direction */
+function activate_down() {
+  up_down_flag = 1;
+  up_button.className = "w3-button smallb w3-pale-yellow w3-round";
+  down_button.className = "w3-button smallb w3-yellow w3-round";
+  Send("avr0:m0 dir 0");
+}
+
+/* Setup the Start and Stop buttons */
+header = document.getElementById("StartStopPanel");
+btns = header.getElementsByClassName("w3-button");
+btns[0].addEventListener("click",activate_start);
+btns[1].addEventListener("click",activate_stop);
+
+/* function to activate the Start button (turns on motor and runs it) */
+function activate_start() {
+  start_button.className = "w3-button w3-green w3-round";
+  stop_button.className = "w3-button w3-pale-red w3-round";
+  Send("avr0:m0 on 1");
+  var txt ='';
+  if (d_speed == ""){
+    alert("Please Set a value for motor speed!");
+    return;
+  }
+  else if (d_pos == 0 && fixed_pos_mode.checked) {
+    alert("Please set a value for desired source position. \n (If you intend to set 0, please set 0.01)."); 
+      return;
+  }
+  else if (fixed_speed_mode.checked && !up_down_flag) {
+    alert("Please select the direction of movement.");
+    return;
+  }
+  if (fixed_speed_mode.checked) {
+    txt = 'avr0:m0 ramp ' + d_speed;
+  }
+  else if (fixed_pos_mode.checked) {
+      txt = 'avr0:m0 step ' + d_pos + ' ' + d_speed;
+  }
+  alert("CAUTION: The source will start moving after you press OK! be prepared to stop if you've selected the fixed speed mode!");
+  Send(txt);
+ // d_pos = "";
+ // d_speed = "";
+}
+
+/* function to activate the stop button (stops the motor and turns it off) */
+function activate_stop() {
+  start_button.className = "w3-button w3-pale-green w3-round";
+  stop_button.className = "w3-button w3-red w3-round";
+  Send("avr0:m0 stop");
+  Send("avr0:m0 on 0");
+  alert("The source has stopped!");
+}
+
+/*Input the values for speed and position */
+function read_values(event){
+  get_set_values();
+  event.preventDefault();
+}
+
+
+/* this function does not need the event and so it can be called elsewhere */
+function get_set_values() {
+  form = document.getElementById("frm1");
+  var pars = [];
+  var i;
+  for (i = 0; i < form.length ;i++) {
+    var temp_str = (parseFloat(form.elements[i].value * calib_factor)).toString(); 
+    pars[i]= temp_str;
+  }
+  if ( convert_to_cm(pars[0]) < speed_min ) {
+    alert (low_speed_alert);
+    return;
+  }
+  else if ( convert_to_cm(pars[0]) > speed_max ) {
+    alert (high_speed_alert);
+    return;
+  }
+  else if ( convert_to_cm(pars[1]) < pos_min ) {
+    alert (low_pos_alert);
+    return;
+  }
+  else if ( convert_to_cm(pars[1]) > pos_max ) {
+    alert (high_pos_alert);
+    return;
+  }
+  else {
+    d_speed = pars[0];
+    d_pos = pars[1];
+  }
+}
+
+/* Update auto settings upon submitting the form */
+function update_settings(event) {
+  var form = document.getElementById("frm1");
+  d_speed_auto = (parseFloat(form.elements[0].value) * calib_factor).toString();
+  if ( convert_to_cm(d_speed_auto) < speed_min ) {
+    alert (low_speed_alert);
+    return;
+  }
+  else if (convert_to_cm(d_speed_auto) > speed_max ) {
+    alert (high_speed_alert);
+    return;
+  }
+  pos_calib = (parseFloat(form.elements[1].value) * calib_factor).toString();
+  update_table();
+  $.post("save_calibration_settings.php",{speed:d_speed_auto,position:pos_calib});
+  alert("CAUTION!: You are saving new values for default automated settings!");
+  event.preventDefault();
+  return false;
+}
+
+/* Update the automatic table */ 
+function update_table() {
+  var Set_Speed_Cell = document.getElementById("SetSpeedCell");
+  Set_Speed_Cell.innerHTML = (convert_to_cm(parseFloat(d_speed_auto))).toString();
+  var Set_pos_cal_cell = document.getElementById("SetPosCell");
+  Set_pos_cal_cell.innerHTML = (convert_to_cm(parseFloat(pos_calib))).toString();
+  user_indicator.innerHTML = current_user;
+  update_speed("0");
+}
+
+/* Update actual speed indicators */
+function update_speed(v) {
+  var Act_Speed_Cell = document.getElementById("ActSpeedCell");
+  Act_Speed_Cell.innerHTML = v;
+  speed_slider.value = v;
+  act_speed_txt.innerHTML= v; 
+}
+
+
+/* Update actual pos indicators, the function repeatedly calls itself to keep value updated */
+function update_pos() {
+  var x = get_pos();
+  if ( convert_to_cm(x) > pos_max ) {
+      Send("avr0: m0 on 1");
+      Send ("avr0: m0 step " + (pos_max*calib_factor).toFixed(0).toString() + " " + (speed_max*calib_factor).toFixed(0).toString() );
+      alert(pos_alert);
+      Send("avr0: m0 stop");
+  }
+  else if (convert_to_cm(x) < pos_min ) {
+      Send("avr0: m0 on 1");
+      Send ("avr0: m0 step " + (pos_min*calib_factor).toFixed(0).toString() + " " + (speed_max*calib_factor).toFixed(0).toString() ) ;
+      alert(pos_alert);
+      Send("avr0: m0 stop");
+  }
+  LogMsg(last_x);
+  LogMsg(convert_to_cm(x).toString());
+  act_speed = (Math.abs((parseFloat(last_x) - convert_to_cm(x)) * (1000/refresh_frequency))).toFixed(2).toString(); 
+  update_speed(act_speed);
+  var d = new Date();
+  var today = d.getFullYear() + '-' + Pad2(d.getMonth()+1) + '-' + Pad2(d.getDate());
+  var time = Pad2(d.getHours()) + ':' + Pad2(d.getMinutes()) + ':' + Pad2(d.getSeconds());
+  $.post("log_to_file.php",{position:convert_to_cm(x).toFixed(2),speed:act_speed,user:current_user,status:source_status,today:today,time:time});
+  var Act_pos_Cell = document.getElementById("ActPosCell");
+  Act_pos_Cell.innerHTML = convert_to_cm(x);
+  last_x = convert_to_cm(x);
+  position_slider.value = convert_to_cm(x).toFixed(2);
+  act_pos_txt.innerHTML= convert_to_cm(x).toFixed(2); 
+  $.ajax({
+    type: 'POST',
+    async: false,
+    url: "calibration_files/someone_logged_in.txt",
+    success: function(data) {someone_logged_in = data;}
+  });
+  setTimeout(update_pos, refresh_frequency);
+}
+
+/* Uses calibration to convert position from au to cm */
+function convert_to_cm (x) {
+  var cm_x = x/calib_factor;
+  return cm_x;
+}
+  
+   function Pad2(num) {
+              var str = num.toString();
+             return((str.length <2) ? '0' + str: str);
+                }
+
+/* Indicator on whether source is secure */
+function update_status(security_status) {
+  if (security_status) {
+    indicator_div.className= "led-blue";
+    indicator_txt.innerHTML="Resting!";
+  } 
+  else {
+    indicator_div.className= "led-red";
+    indicator_txt.innerHTML="Active!";
+  }
+  source_status = security_status;
+}
+
+/* Send command to CUTE server */ 
+function Send(cmd) {
+  try {
+    if (cuteServer) cuteServer.send(cmd);
+  }
+  catch (err) {
+    LogMsg('<span class=res> Error Sending Command To Server <'+'/span><br/>');
+  }
+}
+
+/* add message to log text */
+function LogMsg(msg) {
+  var log = document.getElementById('log');
+  var lines = log.innerHTML.split('\n');
+  if (lines.length > kLogHisLen) lines.shift();
+  lines.push(msg);
+  last_message = msg;
+  log.innerHTML = lines.join('\n');
+  log.scrollTop = log.scrollHeight;
+}
+
+/* Handle Keypresses in Comment field */ 
+function Comment(event) {
+  var key = event.which || event.keyCode;
+  if (key == 13) {
+    comNum =0; 
+    if (comHis[0] != comment.value) {
+      comHis[0] = comment.value;
+      comHis.unshift('');
+      if (comHis.length > kComHisLen) comHis.pop();
+    }
+    var txt = comment.value;
+    var cmd = txt.split(' ',1)[0];
+    if (cmd && cmd.length > 1 && cmd.substr(0,1) == '/') {
+      Send(cmd.substr(1) + ':' + txt.substr(txt.indexOf(cmd)+cmd.length+1));
+    }
+    else {
+      Send('log:"'+comment.value+'"');
+    }
+    comment.value = '';
+  }
+}
+
+/* Handle up/down keys in comment text entry */
+function CommentKey(event) {
+  var key = event.which || event.keyCode;
+  if (key == 38 || key == 40 ) {
+    event.preventDefault();
+    if (comNum ==0) comHis[0] = comment.value;
+    if (key == 38) {
+      if (comNum < comHis.length -1 ) {
+        comment.value = comHis[++comNum];
+      }
+    }
+    else { 
+      if (comNum > 0 ) {
+        comment.value = comHis[--comNum];
+      }
+    }
+  }
+  else if (key == 27) {
+    Send('avr0:halt');
+  }
+  else if (key == 9 ) {
+    event.preventDefault();
+  }
+}
+
+/*Query the position */ 
+function get_pos(){
+  Send('avr0: m0 pos');
+  return act_pos;
+}
+
+function ConnectToServer() {
+  if (cuteServer) return;
+  try {
+    var host = window.location.hostname;
+    var port = 8080;
+    if ( host == "") host = "localhost";
+    var ws = new WebSocket("ws://"+host+":"+port,["cute", "test"]);
+    cuteServer = ws;
+    ws.onopen = function () {
+      if ( ws !=cuteServer ) {
+        ws.close();
+        return;
+      }
+      ws.onmessage = function(message) {
+        if (ws != cuteServer) {
+          ws.close();
+          return;
+        }
+        var c = message.data.substr(0,1);
+        var msg = message.data.substr(2);
+        switch (c) {
+          case 'C': 
+            var temp_msg ="";
+            var locate_pos = msg.search("POS");
+            var locate_val = msg.search("VAL");
+            if (locate_pos != -1 ) {
+              temp_msg = msg.substr(locate_pos); 
+              act_pos = temp_msg.substr(4);
+              act_pos = act_pos.substring(0,act_pos.indexOf("<"));
+            }
+            else if (locate_val !=-1 ){
+              temp_msg = msg.substr(locate_val);
+              temp_msg = temp_msg.substr(4);
+              temp_msg = temp_msg.substring(0,temp_msg.indexOf("<"));
+              var security_status = false;
+              if (temp_msg == "1" ) {
+                security_status = false;
+              }
+              else if ( temp_msg == "0") {
+                security_status = true;
+              }
+              update_status(security_status);
+            }
+            else {
+              LogMsg(msg);
+            }
+            break;
+        }
+      };
+    };
+    ws.onclose = function(event) {
+      ForgetServer(ws);
+    };
+    ws.onerror = function() {
+      ws.close();
+      ForgetServer(ws);
+    };    
+  }
+  catch(err) {
+    if(err) ForgetServer(ws);
+  }
+}
+
+
+/* Forget about server after disconnect, or error, then reconnect */
+function ForgetServer(ws) {
+    localStorage.setItem("current_user","viewer");
+    localStorage.setItem("access_lvl",0);
+    $.post("someone_using.php",{someone_using:"n",user:current_user});
+    if (ws==cuteServer) {
+        ClearAll();
+        cuteServer = null;
+        setTimeout(ConnectToServer,1000);
+    }
+}
+
+/* Query the status of the connection, and return it to a boolean variable */
+function check_source_status() {
+  Send('avr0: pb4');
+  setTimeout(check_source_status,refresh_frequency);
+}
+
+
+/* This function generates the default settings */
+function initialize(){
+    if(!cuteServer)
+    {
+        speed_slider.value = 0;
+        act_speed_txt.innerHTML= "0";
+        act_pos_txt.innerHTML="0";
+        ConnectToServer();
+        setTimeout(start_process,500);
+    }
+}
+
+function start_process(){ 
+  check_source_status();
+  update_pos();    
+  update_table();  
+  setTimeout( function() {
+   if (source_status) {
+     fix_secure_pos();
+   }
+   else {
+     alert("Warning! Source is not secured! In order to use the automatic calibration panel, you need to manually send the source to secure position and refresh this page!");
+   }
+ }, 200);
+}
+
+function fix_secure_pos() {
+  pos_secure = get_pos();
+  LogMsg("secure_pos=");
+  LogMsg(pos_secure);
+}
+
+
+window.onload = initialize;
+window.onclose = ForgetServer(cuteServer);
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        LoginDiv.style.display = "none";
+    }
+}
+</script>
+
+</html>
+
+
