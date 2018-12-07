@@ -1,0 +1,3 @@
+#!/bin/sh
+cd ~/source/cute_calibration_system/log
+nohup node ~/source/cute_calibration_system/cute_server.js >/dev/null 2>>cute_server.err &
