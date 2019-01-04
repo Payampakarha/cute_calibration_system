@@ -13,9 +13,9 @@ This software is made to control and operate the hardware used for CUTE gamma ca
 
 ## Software User Interface Manaual 
 
-# Software [link](http://130.15.24.84/cute_calibration_system.html)
+### Software [link](http://130.15.24.84/cute_calibration_system.html)
 
-# Access
+### Access
 The software interface includes a webpage that is accessible via any browser. It is meant to be used for monitoring, and controlling the source position through the system. The source will be most often located at the so called "rest" position inside a Pb shielding in the calibration frame, installed on the top of the drywell. It can be moved to a previously optimized "deployment" position, at the detector tower height. It can however be manually moved to any other height from the top to the bottom of the cryostat if needed. 
 
 The software is provided for 3 use-cases, listed below: 
@@ -26,7 +26,13 @@ The software is provided for 3 use-cases, listed below:
 
 * **Expert** : The "expert" user is someone who has knowledge of the calibration system hardware, and basic knowledge of how the control software is developed. The access is given by the same login system with different authentications, after the user clicks on the Manual calibration panel header. The "expert" operator has access to all features of the software interface, including both the Automatic and the Manual panels. The additional operating modes used in the Manual calibration panel are described below in this manual. 
 
-# Operating modes
+#### Login:
+In order to login, any user must be given the authentications based on the level of expertise. Once the access to any of the two panels (automatic or calibration) is requested via clicking on the panel's header, the login page is opened and the login php script is activated on the server to verify login. As soon as a user has logged in (either as shifter or expert), a flag is raised on the server preventing further logins. New users are warned about an existing login upon trial.
+
+#### Logout:
+Logout is automatically performed as soon as the webpage is closed or interrupted. 
+
+### Operating modes
 
 * **Automatic Calibration Mode**: In this mode, there are only two buttons available. 
 	* **Deploy for calibration**: This button will send the source to the calibration location, previously set by an "expert" user using **Set Values** button in the Manual calibration mode. 
