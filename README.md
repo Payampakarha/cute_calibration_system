@@ -48,4 +48,54 @@ Logout is automatically performed as soon as the webpage is closed or interrupte
 	
 ## Software Details 
 
-How to find things through the software and possibly change them.
+### Software Configuration
+
+#### Original location
+The software has been always configured on the Minimac machine, that was set as a webserver by Phil Harvey on the local Physics department network. One can ssh to the machine at the current IP locaiton 
+
+```
+ssh cute@130.15.24.84
+``` 
+. However, supposedly, this IP address will change, when we move this webserver to SNOLAB (or,alternatively configure a new one at SNOLAB, using another machine). Anyhow, the original version of the code is located at 
+
+``` 
+cd /Users/cute/source/cute_calibration_system
+```
+. Moreover, a copy of the html file, needs to be cloned at the location where the webserver is broadcasting. At the current machine, this folder can be located at:
+
+```
+cd /Library/WebServer/Documents
+```
+. In addition, the folder, where this git repository is generated from is located at: 
+
+```
+cd /Users/cute/git/cute_calibration_system
+```
+.
+
+#### Downloading the software from git 
+The software can be simply downloaded from this linke, using the green button "clone or download" above. Alternatively, if you have "git" configured at your machine, after navigation to your destination folder through your terminal you can type: 
+
+```
+git clone https://github.com/Payampakarha/cute_calibration_system
+```
+. Note that the current repository is posted on Payam's personal git repository as "public". Should this turn unconvenient at any time, it can be posted to another repository (one created for CUTE for instance). 
+
+#### Broadcasting the webpage
+Once the software is downloaded, the webpage can be shared via copying the _cute_calibration_system.html_ to the corresponding _public_ folder on your machine. 
+
+#### Running the software prerequisis
+*  **node node is needed to be installed on your machine in order to run javascript codes. It can b downloaded from this [website](https://nodejs.org/en/download/). 
+*  **nohup nohup is supplement command that tells unix system not to stop another command on termination of the current process (termination of the current shell, or restarting the machine, etc.). It is typically configured on most unix/mac machines (its a package under QPKG libraries). If this is not the case, it can be installed using this [link](https://support.elephantdrive.com/hc/en-us/articles/205535738-How-to-install-the-ElephantDrive-QPKG-). 
+
+
+#### Running the webserver
+In order to temporarily test the webservre, one can simply run the webserver by navigating to the folder where the software is downloeded through a terminal and typing :
+```
+node cute_server.js
+```
+.After the performance of the webpage is verified, and if you want to permanently broadcast the webpage, you can run the _start_server_ bashscript that uses nohup to permanently run the server. 
+```
+./start_server
+```
+
