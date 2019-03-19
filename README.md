@@ -85,8 +85,8 @@ git clone https://github.com/Payampakarha/cute_calibration_system
 Once the software is downloaded, the webpage can be shared via copying the _cute_calibration_system.html_ to the corresponding _public_ folder on your machine. 
 
 #### Running the software prerequisis
-*  **node node is needed to be installed on your machine in order to run javascript codes. It can b downloaded from this [website](https://nodejs.org/en/download/). 
-*  **nohup nohup is supplement command that tells unix system not to stop another command on termination of the current process (termination of the current shell, or restarting the machine, etc.). It is typically configured on most unix/mac machines (its a package under QPKG libraries). If this is not the case, it can be installed using this [link](https://support.elephantdrive.com/hc/en-us/articles/205535738-How-to-install-the-ElephantDrive-QPKG-). 
+*  **node** node is needed to be installed on your machine in order to run javascript codes. It can b downloaded from this [website](https://nodejs.org/en/download/). 
+*  **nohup** nohup is supplement command that tells unix system not to stop another command on termination of the current process (termination of the current shell, or restarting the machine, etc.). It is typically configured on most unix/mac machines (its a package under QPKG libraries). If this is not the case, it can be installed using this [link](https://support.elephantdrive.com/hc/en-us/articles/205535738-How-to-install-the-ElephantDrive-QPKG-). 
 
 
 #### Running the webserver
